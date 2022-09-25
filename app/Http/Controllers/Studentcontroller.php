@@ -56,9 +56,10 @@ class Studentcontroller extends Controller
      */
     public function show($id)
     {
-        $students = Student::find($id);
+        $student = Student::find($id);
         $students = Student::all();
-        return view('student',['students'=>$students,'Student','layout'=>'show']);
+        return view('student',['students'=>$students, 'student'=>$student, 'Student','layout'=>'show']);
+        // return view('student', compact('student', 'students', 'show'));
     }
 
     /**
@@ -107,6 +108,8 @@ class Studentcontroller extends Controller
     public function destroy($id)
     {
         $students = Student::find($id);
+
+        // altered from deleted() to delete()
         $students -> delete();
         return redirect('/');
     }

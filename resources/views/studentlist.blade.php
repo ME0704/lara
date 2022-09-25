@@ -12,12 +12,12 @@
         @foreach ($students as $student)
         <tr>
             <td>{{$student -> cne}}</td>
-            <td>{{$student -> firstname}}</td>
+            <td><a href="/show/{{$student->id}}">{{$student -> firstname}}</a></td>
             <td>{{$student -> secondname}}</td>
             <td>{{$student -> age}}</td>
             <td>{{$student -> speciality}}</td>
 
-            <!-- changed the link to EDIT route instead of the pre-existing STORE route -->
+            <!-- changed the link to EDIT route instead of the pre-existing UPDATE route -->
             <td><a href="/edit/{{$student -> id}}" class="btn btn-sm btn-warning">Edit</a></td>
 
             <!-- added a delete form -->
