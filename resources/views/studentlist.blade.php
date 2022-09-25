@@ -16,7 +16,17 @@
             <td>{{$student -> secondname}}</td>
             <td>{{$student -> age}}</td>
             <td>{{$student -> speciality}}</td>
-            <td><a href="{{url('/update/'.$student -> id)}}" class="btn btn-sm btn-warning">Edit</a></td>
+
+            <!-- changed the link to EDIT route instead of the pre-existing STORE route -->
+            <td><a href="/edit/{{$student -> id}}" class="btn btn-sm btn-warning">Edit</a></td>
+
+            <!-- added a delete form -->
+            <td>
+                <form action="/delete/{{$student->id}}" method="post">
+                    @csrf
+                    <button type="submit" class="btn btn-danger"><i class="bi bi-trash-fill"></i></button>
+                </form>
+            </td>
         </tr>
         @endforeach
     </tbody>

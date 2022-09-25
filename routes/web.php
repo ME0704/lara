@@ -19,11 +19,17 @@ Route::get('/', function () {
 });
 
 Route::get('/', "App\Http\Controllers\Studentcontroller@index");
-Route::post('/edit/{id}', "App\Http\Controllers\Studentcontroller@edit");
+
+// just corrected edit route, was initially mistaken as a POST route
+Route::get('/edit/{id}', "App\Http\Controllers\Studentcontroller@edit");
+
 Route::get('/show/{id}', "App\Http\Controllers\Studentcontroller@show");
 Route::get('/create', "App\Http\Controllers\Studentcontroller@create");
 Route::post('/store', "App\Http\Controllers\Studentcontroller@store");
 Route::post('/update/{id}',"App\Http\Controllers\Studentcontroller@update");
+
+// including laravel 8 & 9 style delete route
+Route::post('/delete/{id}', [Studentcontroller::class, 'destroy']);
 
 // Route::get('/', [App\Http\Controllers\Studentcontroller::class, 'index'])->name('home');
 

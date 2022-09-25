@@ -4,9 +4,15 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bootstrap demo</title>
+
+    <!-- changed title -->
+    <title>CRUD Laravel Application</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+
+        <!-- bootstrap icons -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+
 </head>
 <body>
     @if($layout == 'index')
@@ -40,8 +46,12 @@
                         <label for="speciality">Speciality</label>
                         <input type="text" name="speciality" class="form-control" placeholder="EnterSpeciality">
                     </div>
-                    <input type="submit" class="btn btn-info">
-                    <input type="reset" class="btn btn-warning">
+
+                    <!-- changed button text to create student when layout = index -->
+                    <input type="submit" class="btn btn-info" value="Create student">
+
+                    <!-- commenting out reset button since not needed -->
+                    <!--<input type="reset" class="btn btn-warning">-->
                 </form>
             </section>
         </div>
@@ -53,9 +63,44 @@
             </div>
         </div>
         @elseif($layout == 'edit')
-        <div class="container-fluid">
+        <!-- added a row class -->
+        <div class="container-fluid row">
             <section class="col">@include("studentlist")</section>
-            <section class="col"></section>
+
+            <!-- next next section was initially empty. Added an update form for when layout = edit -->
+            <section class="col">
+                <section class="col">
+                    <form action="/update/{{$student->id}}" method="POST">
+                        <!--to avoid forgery we write that codebelow-->
+                        @csrf
+                        <div class=" form-group">
+                            <label for="cne">CNE</label>
+                            <input value="{{$student->cne}}" type="text" name="cne" class="form-control" placeholder="Enter CNE">
+                        </div>
+                        <div class="form-group">
+                            <label for="firstname">FirstName</label>
+                            <input value="{{$student->firstname}}" type="text" name="firstname" class="form-control" placeholder="Enter Firstname">
+                        </div>
+                        <div class="form-group">
+                            <label for="lastname">LastName</label>
+                            <input value="{{$student->secondname}}" type="text" name="secondname" class="form-control" placeholder="Enter Lastname">
+                        </div>
+                        <div class="form-group">
+                            <label for="age">Age</label>
+                            <input value="{{$student->age}}" type="text" name="age" class="form-control" placeholder="Enter Age">
+                        </div>
+                        <div class="form-group">
+                            <label for="speciality">Speciality</label>
+                            <input value="{{$student->speciality}}" type="text" name="speciality" class="form-control" placeholder="EnterSpeciality">
+                        </div>
+
+                        <!-- changed button text to update -->
+                        <input type="submit" class="btn btn-info" value="Update">
+                        <!-- commenting out reset button since not needed -->
+                        <!-- <input type="reset" class="btn btn-warning"> -->
+                    </form>
+                </section>
+            </section>
         </div>
         @elseif($layout == 'update')
         <div class="container-fluid">
