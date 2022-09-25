@@ -69,9 +69,12 @@ class Studentcontroller extends Controller
      */
     public function edit($id)
     {
-        $students = Student::find($id);
+        // renamed the first variable to student, initially they were two similar overlapping variable names
+        $student = Student::find($id);
         $students = Student::all();
-        return view('student',['students'=>$students,'layout'=>'edit']);
+
+        // sent the new $student variable to the view as well
+        return view('student',['students'=>$students, 'student'=>$student, 'layout'=>'edit']);
     }
 
     /**
@@ -89,7 +92,9 @@ class Studentcontroller extends Controller
         $student -> secondname = $request -> input('secondname');
         $student -> age = $request -> input('age');
         $student -> speciality = $request -> input('speciality');
-        $student -> save();
+
+        // altered to update method instead of save
+        $student -> update();
         return redirect('/');
     }
 
@@ -102,7 +107,7 @@ class Studentcontroller extends Controller
     public function destroy($id)
     {
         $students = Student::find($id);
-        $students -> deleted();
+        $students -> delete();
         return redirect('/');
     }
 }
